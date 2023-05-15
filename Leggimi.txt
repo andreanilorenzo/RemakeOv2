@@ -1,0 +1,61 @@
+>1> RemakeOv2
+>2> 1.4 build 75
+>3> Freeware
+>5> 06/12/2005
+>6> Programma per i file POI dei navigatori GPS
+
+
+Da fare: Controllo che tute le icone siano a 16 colori.. 
+
+Elenco generale delle funzioni disponibili:
+- Possibilità di esecuzione delle operazioni su più file in modo automatico.
+- Importazione ed esportazione in vari formati con il programma GPSBabel.
+- Eportazione in formato GPX con le zone tracciate (per Google Earth).
+- Trattamento (per eliminare il problema di TomTom balbuzziente) dei file .ov2 con le utility della TomTom ov2tools oppure il programma GPSBabel.
+
+- Visualizzazione delle informazioni contenute nei file POI.
+- Verifica degli SkipperRecord contenuti nei file .ov2
+- Possibilità di modifica delle informazioni contenute nei file POI sia in modo automatico che in modo manuale. Esempio di descrizione generata: Descrizione[NumeroCivico]Indirizzo(CAP Città)Provincia>Telefono
+- Creazione e modifica di POI personalizzati tramite la ricerca di indirizzi da internet.
+
+- Visualizzazione della posizione su cartina dal web.
+
+- Download automatico dei POI dal sito poigps.
+
+- Registrazione dei formati conosciuto dal programma per l'apertura del file con il semplice doppio click.
+
+Il limite masimo di POI supportati contemporaneamente da TomTom credo che sia in 40 file .ov2 che si possono mettere nella cartella della mappa. Ma è consigliabile attivarne in visualizzazione circa un massimo di 18, 20, 22.
+
+E' possibile verificare se il file .ov2 è da riparare oppure no.
+Per fare questo è necessario trascinare il file .ov2 sopra il tasto "Verifica File" ed attendere l'apertura della finestra.
+Se nelle colonne A, B, C, D non ci sono valori significa che il file non contiene lo SKIPPER RECORD necessario per il corretto funzionamento di TomTom e quindi (per utilizzarlo con TomTom) è necessario procedere con la rigenerazione del file.
+Dopo la rigenerazione, il file, può essere nuovamente aperto per visualizzare il risultato.
+
+Per ricerca di librerie mancanti: http://www.dll-files.com/
+>10> Windows XP
+>11> Utility
+>12> Ottimo
+>13> http://www.nokioteca.net/home/forum/index.php?showtopic=916
+http://win.poigps.com/modules.php?name=Forums&file=viewtopic&t=11153&sid=c1eef4e07369690a33569adafd4b62ec
+http://www.serie60.it/modules.php?name=Forums&file=viewtopic&p=33403#33403
+
+
+http://win.poigps.com/modules.php?name=Forums&file=viewtopic&t=4817&sid=128926d73145511c93e51eeb17d9f407
+
+
+
+http://www.licour.com/    poi.dat originale di TomTom
+
+http://www.riccardogarofano.com/Default.aspx?page=Software    CarPc
+
+http://www.poigps.com/modules.php?name=Forums&file=viewtopic&p=43429#43429 (programma per scaricare indirizzi)
+http://www.poigps.com/modules.php?name=Forums&file=viewtopic&t=7505
+
+
+http://www.poigps.com/modules.php?name=Forums&file=viewtopic&t=8091 (GPSMatrix ottimo prog excel)
+http://www.poigps.com/modules.php?name=Forums&file=viewtopic&t=10252#60428  (guida)
+
+
+http://www.autovelox.net/navigatore-gps.html (programmi per POI)
+
+http://www.drunkendonkey.net/ita/index.php?act=ST&f=146&t=102306&st=0#entry1199658

@@ -1,0 +1,87 @@
+            ' Cerco su Google -------------------------------------------------------------------------------------------------------------------
+            ElseIf Trim$(cmbSitoCoordinate.Text) = "Google.com" Then
+                For i = 0 To doc.Scripts.Length - 1
+                    scratch = doc.Scripts.Item(i).Text
+                    
+                    If InStr(1, scratch, "panel:") > 0 Then
+                        Longitudine = "0.0"
+                        Latitudine = "0.0"
+                        trovato = True
+                    End If
+                    
+                    pos1 = InStr(1, scratch, "lat: ")
+                    If trovato = False Then
+                        If pos1 > 0 Then
+                            pos2 = InStr(pos1, scratch, ",")
+                            If pos2 > pos1 Then
+                                Latitudine = Mid(scratch, pos1 + 5, pos2 - (pos1 + 5))
+                            Else
+                                Latitudine = "0.0"
+                            End If
+                        Else
+                            Latitudine = "0.0"
+                        End If
+                        
+                        pos1 = InStr(1, scratch, "lng: ")
+                        
+                        If pos1 > 0 Then
+                                pos2 = InStr(pos1, scratch, "}")
+                            If pos2 > pos1 Then
+                                Longitudine = Mid(scratch, pos1 + 5, pos2 - (pos1 + 5))
+                                trovato = True
+                            Else
+                                Longitudine = "0.0"
+                            End If
+                        Else
+                            Longitudine = "0.0"
+                        End If
+                    End If
+                    DoEvents
+                Next
+
+
+
+
+
+
+
+
+
+            ' Cerco su MultiMap -------------------------------------------------------------------------------------------------------------------
+            ElseIf Trim$(cmbSitoCoordinate.Text) = "MultiMap.com" Then
+                scratch = URL
+                
+                pos1 = InStr(1, scratch, "&lon=")
+                If pos1 > 0 Then
+                    pos2 = InStr(pos1, scratch, "&lat=")
+                    If pos2 > pos1 Then
+                        Longitudine = Mid$(scratch, pos1 + 5, pos2 - (pos1 + 5))
+                    Else
+                        Longitudine = "0.0"
+                    End If
+                Else
+                    Longitudine = "0.0"
+                End If
+                
+                
+                pos1 = InStr(1, scratch, "&lat=")
+                If pos1 > 0 Then
+                    pos2 = InStr(pos1, scratch, "&place=")
+                    If pos2 > pos1 Then
+                        Latitudine = Mid$(scratch, pos1 + 5, pos2 - (pos1 + 5))
+                        
+                        If IsNumeric(Latitudine) = False Then
+                            pos2 = InStr(pos1, scratch, "&search_result=")
+                            If pos2 > pos1 Then
+                                Latitudine = Mid$(scratch, pos1 + 5, pos2 - (pos1 + 5))
+                            Else
+                                Latitudine = "0.0"
+                            End If
+                        End If
+                    Else
+                        Latitudine = "0.0"
+                    End If
+                Else
+                    Latitudine = "0.0"
+                End If
+
