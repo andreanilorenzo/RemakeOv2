@@ -1,0 +1,21 @@
+
+è possibile dal vs programma ricavare in automatico le coordinate GPS (lat e long) di dove ci si trova in quel momento e creare un nuovo POI di una classe custom predefinita da pubblicare poi su una mappa?
+
+
+
+
+
+TomTom ci ha informato di un differente modo di usare gli avvisi dei POI personali in Tomtom 5 e 6. Questo evita di manipolare il file data.chk, ed è molto più flessibile.
+Ecco cosa dovete fare:
+Per ogni vostro file OV2, create un suono di avviso in formato OGG con esattamente lo stesso nome. Così se voi avete un file BP.ov2, create un file BP.ogg e mettetelo nella stessa cartella. (raccomandiamo di usare un rate di 22050 Hz, ma non ha grande importanza).
+
+Quando farete ripartire Tomtom, il nuovo avviso sarà disponibile. 
+
+Il file data.chk non è possibile cancellarlo, perchè altrimenti non funziona più nulla.
+E' possibile lasciare l'originale.
+E' possibile avere 50 avvisi.
+
+
+Aggiungere la possibilità (una spunta) di salvare ov2 ottimizzati con GPSBabel direttamente da CREA E MODIFICA
+
+Aggiungere la possibilità "sovrascrivi file di origine" oltre a "copia in Desktop" e "copia in PoiScaricati" nel modulo RIPARA E CONVERTI FILE.

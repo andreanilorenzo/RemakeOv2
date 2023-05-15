@@ -1,0 +1,147 @@
+':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+':::                                                                         :::
+':::  TITLE: Calculate Latitude and Longitude from Rate Center V&H in        :::
+':::         Visual Basic                                                    :::
+':::                                                                         :::
+':::  This function calculates the latitude and longitude coordinates        :::
+':::  from Vertical and Horizontal (V&H) coordinates. V&H's are used to      :::
+':::  identify locations and hence relative distances between network        :::
+':::  elements and between rate centers listed in AreaCodeWorld(tm) Gold     :::
+':::  Edition in http://www.zipcodeworld.com.                                :::
+':::                                                                         :::
+':::  Function Input Parameters:                                             :::
+':::    V = Vertical value from 0 to 10000                                   :::
+':::    H = Horizontal value from 0 to 10000                                 :::
+':::                                                                         :::
+':::  Function Output Parameters:                                            :::
+':::    Lat = Latitude from Vertical value                                   :::
+':::    Long = Longitude from Horizontal value                               :::
+':::                                                                         :::
+':::  North American Area Code NPA NXX database with V&H values is           :::
+':::  available at http://www.zipcodeworld.com. This sample code is          :::
+':::  provided to database subscribers "AS IS" without warranty of any kind. :::
+':::                                                                         :::
+':::  Email: sales@zipcodeworld.com                                          :::
+':::                                                                         :::
+':::  URL:   http://www.zipcodeworld.com                                     :::
+':::                                                                         :::
+':::          ZIPCodeWorld.com © All Rights Reserved 2002-2005               :::
+':::                                                                         :::
+':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+' call vh2latlong(5079, 1444)
+
+const M_PI = 3.14159265358979323846
+
+const TRANSV = 6363.235
+const TRANSH = 2250.7
+
+const ROTC = 0.23179040
+const ROTS = 0.97276575
+
+const RADIUS = 12481.103
+
+const EX = 0.40426992
+const EY = 0.68210848
+const EZ = 0.60933887
+
+const WX = 0.65517646
+const WY = 0.37733790
+const WZ = 0.65449210
+
+const PX = -0.555977821730048699
+const PY = -0.345728488161089920
+const PZ = 0.755883902605524030
+
+const GX = 0.216507961908834992
+const GY = -0.134633014879368199
+
+const A = 0.151646645621077297
+
+const Q = -0.294355056616412800
+const Q2 = 0.0866448993556515751
+
+Function vh2latlong(v, h)
+	Dim x, y, z, delta, t1, t2, vhat, hhat, e, w, fx, fy, b, c, disc, lat, lat2, lon, earthlon, earthlat
+	Dim bi(7)
+	bi(0) = 1.00567724920722457
+	bi(1) = -0.00344230425560210245
+	bi(2) = 0.000713971534527667990
+	bi(3) = -0.0000777240053499279217
+	bi(4) = 0.00000673180367053244284
+	bi(5) = -0.000000742595338885741395
+	bi(6) = 0.0000000905058919926194134
+
+	t1 = (V - TRANSV) / RADIUS
+	t2 = (H - TRANSH) / RADIUS
+	vhat = ROTC * t2 - ROTS * t1
+	hhat = ROTS * t2 + ROTC * t1
+	e = cos(sqr(vhat * vhat + hhat * hhat))
+	w = cos(sqr(vhat * vhat + (hhat - 0.4) * (hhat - 0.4)))
+	fx = EY * w - WY * e
+	fy = EX * w - WX * e
+	b = fx * GX + fy * GY
+	c = fx * fx + fy * fy - Q2
+	disc = b * b - a * c
+		
+	If (disc = 0.0) Then
+		z = b / a
+		x = (GX * z - fx) / Q
+		y = (fy - GY * z) / Q
+	Else
+		delta = sqr(disc)
+		z = (b + delta) / A
+		x = (GX * z - fx) / Q
+		y = (fy - GY * z) / Q
+		If (vhat * ( PX * x + PY * y + PZ * z ) < 0 ) Then
+			z = (b - delta) / A
+			x = (GX * z - FX) / Q
+			y = (fy - GY * z) / Q
+		End If
+	End If
+	lat = Asin(z)
+	lat2 = lat * lat
+	earthlat = 0
+	Dim i, j
+	For j = Lbound(bi) to Ubound(bi)
+		i = Ubound(bi) - j	
+		If i = 0 Then
+			earthlat = (earthlat + bi(i)) * lat
+		Else
+			earthlat = (earthlat + bi(i)) * lat2
+		End If
+	Next
+
+	earthlat = earthlat * 180 / M_PI
+
+	lon = Atan2(x, y) * 180 / M_PI
+
+	earthlon = lon + 52.0
+	
+	msgbox("Lat: " & earthlat & " Lon: " & earthlon)
+End Function
+
+Function Asin(a)
+	If Abs(a) = 1 Then
+		Asin = a* M_PI/2
+	Else
+		Asin = Atn(a/sqr(1-a*a))
+	End If
+End Function 
+
+Function Atan2(ys, xs)
+	Dim theta
+	If xs <> 0 Then
+		theta = Atn(ys / xs)
+		If xs < 0 Then
+			theta = theta + M_PI
+		End If
+	Else
+		If ys < 0 Then
+			theta = 3 * M_PI / 2
+		Else
+			theta = M_PI / 2
+		End If
+	End If
+	atan2 = theta
+End Function
